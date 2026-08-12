@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interview Question Designer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<!-- =========================
+     NAVIGATION BAR
+========================= -->
+
+<nav>
+
+    <div class="logo">
+        🎯 Interview Designer
+    </div>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+
+</nav>
+
+<!-- =========================
+     HEADING
+========================= -->
+
+<div class="container">
+
+    <div class="heading">
+
+        <h1>AI Interview Question Designer</h1>
+
+        <p>
+
+            Welcome,
+            <b>{{ username }}</b>
+
+        </p>
+
+        <p>
+
+            Select a role and experience level to generate
+            professional interview questions.
+
+        </p>
+
+    </div>
+
+    <!-- =========================
+         FORM
+    ========================= -->
+
+    <div class="form-card">
+
+        <form method="POST">
+
+            <div class="row">
+
+                <div class="col">
+
+                    <label><b>Select Role</b></label>
+
+                    <select name="role" required>
+
+                        <option value="">Choose Role</option>
+
+                        <option value="Python Developer"
+                        {% if role=="Python Developer" %}selected{% endif %}>
+                        Python Developer
+                        </option>
+
+                        <option value="Java Developer"
+                        {% if role=="Java Developer" %}selected{% endif %}>
+                        Java Developer
+                        </option>
+
+                        <option value="Web Developer"
+                        {% if role=="Web Developer" %}selected{% endif %}>
+                        Web Developer
+                        </option>
+
+                        <option value="Data Analyst"
+                        {% if role=="Data Analyst" %}selected{% endif %}>
+                        Data Analyst
+                        </option>
+
+                        <option value="Machine Learning Engineer"
+                        {% if role=="Machine Learning Engineer" %}selected{% endif %}>
+                        Machine Learning Engineer
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col">
+
+                    <label><b>Experience Level</b></label>
+
+                    <select name="level" required>
+
+                        <option value="">Choose Level</option>
+
+                        <option value="Fresher"
+                        {% if level=="Fresher" %}selected{% endif %}>
+                        Fresher
+                        </option>
+
+                        <option value="1-3 Years"
+                        {% if level=="1-3 Years" %}selected{% endif %}>
+                        1–3 Years
+                        </option>
+
+                        <option value="3-5 Years"
+                        {% if level=="3-5 Years" %}selected{% endif %}>
+                        3–5 Years
+                        </option>
+
+                        <option value="5+ Years"
+                        {% if level=="5+ Years" %}selected{% endif %}>
+                        5+ Years
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="generate-btn">
+
+                🚀 Generate 10 Interview Questions
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- =========================
+         QUESTIONS
+    ========================= -->
+
+    {% if questions %}
+
+    <h2 style="color:#1e3a8a;margin-bottom:20px;">
+
+        Generated Questions
+
+    </h2>
+
+    {% for q in questions %}
+
+    <div class="question-card">
+
+        <div class="question-number">
+
+            Question {{ q.number }}
+
+        </div>
+
+        <div class="question">
+
+            {{ q.question }}
+
+        </div>
+
+        <div class="answer">
+
+            <span>Strong Answer Indicators:</span>
+
+            <br><br>
+
+            {{ q.indicator }}
+
+        </div>
+
+        <div class="badge">
+
+            {{ role }} • {{ q.level }}
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+    {% endif %}
+
+</div>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+
+        © 2026 Interview Question Designer
+
+    </p>
+
+    <p>
+
+        Built with Flask • HTML • CSS • Python
+
+    </p>
+
+</footer>
+
+</body>
+
+</html>
